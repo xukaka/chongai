@@ -30,12 +30,15 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(value = "注册表单")
 public class RegisterForm {
     @ApiModelProperty(value = "手机号",name = "mobile")
-    @NotBlank(message="手机号不能为空")
     private String mobile;
 
-    @ApiModelProperty(value = "登录密码标识")
-    @NotBlank(message="唯一标识不能为空")
+    @ApiModelProperty(value = "登录账号")
+    @NotBlank(message="登录的账号")
     private String identifier;
+
+    @ApiModelProperty(value = "登录账号")
+    @NotBlank(message="登录的密码")
+    private String credential;
 
     @ApiModelProperty(value = "昵称")
     private String nickName;
@@ -139,6 +142,14 @@ public class RegisterForm {
 
     public void setIdentityType(String identityType) {
         this.identityType = identityType;
+    }
+
+    public String getCredential() {
+        return credential;
+    }
+
+    public void setCredential(String credential) {
+        this.credential = credential;
     }
 
     @Override

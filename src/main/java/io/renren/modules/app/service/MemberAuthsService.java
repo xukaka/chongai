@@ -10,5 +10,5 @@ import io.renren.modules.app.entity.MemberAuths;
  */
 public interface MemberAuthsService extends IService<MemberAuths> {
 
-    MemberAuths queryByIdentifier(String identifier);
+    MemberAuths queryByTypeAndIdentifier(String identityType,String identifier);
 }

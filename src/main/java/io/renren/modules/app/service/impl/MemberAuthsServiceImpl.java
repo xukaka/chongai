@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class MemberAuthsServiceImpl extends ServiceImpl<MemberAuthsDao, MemberAuths> implements MemberAuthsService {
 
     @Override
-    public MemberAuths queryByIdentifier(String identifier) {
-        return baseMapper.queryByIdentifier(identifier);
+    public MemberAuths queryByTypeAndIdentifier(String identityType,String identifier) {
+        return baseMapper.queryByTypeAndIdentifier(identityType,identifier);
     }
 }

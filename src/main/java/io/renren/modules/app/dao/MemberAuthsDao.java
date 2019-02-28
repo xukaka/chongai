@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import io.renren.modules.app.entity.Member;
 import io.renren.modules.app.entity.MemberAuths;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户授权表
@@ -11,5 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MemberAuthsDao extends BaseMapper<MemberAuths> {
-     MemberAuths queryByIdentifier(String identifier);
+     MemberAuths queryByTypeAndIdentifier(@Param("identityType") String type,@Param("identifier") String identifier);
 }

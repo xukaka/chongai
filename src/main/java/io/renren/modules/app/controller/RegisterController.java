@@ -38,8 +38,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/app")
 @Api(tags = "APP用户注册接口")
-public class AppRegisterController {
-    private final static Logger logger = LoggerFactory.getLogger(AppRegisterController.class);
+public class RegisterController {
+    private final static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
     private MemberService memberService;
@@ -62,8 +62,9 @@ public class AppRegisterController {
         member.setCreateTime(new Date());
 
         MemberAuths auths = new MemberAuths();
-        auths.setIdentifier(DigestUtils.sha256Hex(form.getIdentifier()));
+        auths.setCredential(DigestUtils.sha256Hex(form.getCredential()));
         auths.setIdentityType(form.getIdentityType());
+        auths.setIdentifier(form.getIdentifier());
 
         memberService.registerMemberWithAuth(member,auths);
 
@@ -80,12 +81,12 @@ public class AppRegisterController {
         ValidatorUtils.validateEntity(form);
 
         //用户登录
-        MemberAuths auths = memberAuthsService.queryByIdentifier(DigestUtils.sha256Hex(form.getIdentifier()));
+        MemberAuths auths = memberAuthsService.queryByTypeAndIdentifier(form.getIdentityType(),form.getIdentifier());
         if(ObjectUtils.isEmpty(auths)){
-            throw new RRException("密码或唯一身份标识错误");
+            throw new RRException("账号不存在");
         }
-        if(auths.getIdentityType().equals(form.getIdentityType())){
-            throw new RRException("登录方式有误");
+        if(!auths.getCredential().equals(DigestUtils.sha256Hex(form.getCredential()))){
+            throw new RRException("登录密码(凭证)错误");
         }
         //生成token
         String token = jwtUtils.generateToken(auths.getMemberId());

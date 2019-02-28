@@ -21,11 +21,11 @@ public class MemberAuths implements Serializable {
     //登录类型
     private String identityType;
 
-    //登录标识(密码)
+    //登录账号
     private String identifier;
 
-    //站内toke
-    private String toke;
+    //身份凭证密码
+    private String credential;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class MemberAuths implements Serializable {
         this.identifier = identifier;
     }
 
-    public String getToke() {
-        return toke;
+    public String getCredential() {
+        return credential;
     }
 
-    public void setToke(String toke) {
-        this.toke = toke;
+    public void setCredential(String credential) {
+        this.credential = credential;
     }
 }

@@ -1,7 +1,9 @@
 package io.renren.modules.app.resolver;
 
 import io.renren.modules.app.annotation.LoginUser;
+import io.renren.modules.app.entity.Member;
 import io.renren.modules.app.interceptor.AuthorizationInterceptor;
+import io.renren.modules.app.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -20,11 +22,11 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Autowired
-    private UserService userService;
+    private MemberService userService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(UserEntity.class) && parameter.hasParameterAnnotation(LoginUser.class);
+        return parameter.getParameterType().isAssignableFrom(Member.class) && parameter.hasParameterAnnotation(LoginUser.class);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
         }
 
         //获取用户信息
-        UserEntity user = userService.selectById((Long)object);
+        Member user = userService.selectById((Long)object);
 
         return user;
     }

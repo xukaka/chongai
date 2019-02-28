@@ -4,12 +4,12 @@ package io.renren.modules.app.controller;
 import io.renren.common.utils.R;
 import io.renren.modules.app.annotation.Login;
 import io.renren.modules.app.annotation.LoginUser;
+import io.renren.modules.app.entity.Member;
+import io.renren.modules.app.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * APP测试接口
@@ -20,14 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/app")
-@Api("APP测试接口")
-public class AppTestController {
+@Api("用户信息接口")
+public class MemberController {
+
+    @Autowired
+    MemberService memberService;
 
     @Login
-    @GetMapping("userInfo")
+    @GetMapping("memberInfo")
     @ApiOperation("获取用户信息")
-    public R userInfo(@LoginUser UserEntity user){
-        return R.ok().put("user", user);
+    public R memberInfo(@RequestParam("memberId") Long memberId){
+        Member member = memberService.selectById(memberId);
+        return R.ok().put("member", member);
     }
 
     @Login

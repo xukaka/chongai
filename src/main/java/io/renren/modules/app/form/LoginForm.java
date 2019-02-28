@@ -1,19 +1,3 @@
-/**
- * Copyright 2018 人人开源 http://www.renren.io
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package io.renren.modules.app.form;
 
 import io.swagger.annotations.ApiModel;
@@ -23,9 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * 登录表单
- *
- * @author Mark sunlightcs@gmail.com
- * @since 3.1.0 2018-01-25
+ * @author xukaijun
  */
 @ApiModel(value = "登录表单")
 public class LoginForm {
@@ -36,9 +18,13 @@ public class LoginForm {
     @NotBlank(message = "登录方式必填")
     private String identityType;
 
-    @ApiModelProperty(value = "登录密码标识")
-    @NotBlank(message="唯一标识必填")
+    @ApiModelProperty(value = "登录账号")
+    @NotBlank(message="登录账号必填")
     private String identifier;
+
+    @ApiModelProperty(value = "登录秘密凭证")
+    @NotBlank(message="登录密码凭证必填")
+    private String credential;
 
     public String getMobile() {
         return mobile;
@@ -46,6 +32,14 @@ public class LoginForm {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public String getIdentityType() {
@@ -56,11 +50,11 @@ public class LoginForm {
         this.identityType = identityType;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public String getCredential() {
+        return credential;
     }
 
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
+    public void setCredential(String credential) {
+        this.credential = credential;
     }
 }
