@@ -83,3 +83,8 @@ renren:
     expire: 3600
     header: token
 
+wx:
+  app_id: xxx
+  app_secret: xxx
+  code_session_url: https://api.weixin.qq.com/sns/jscode2session
+
