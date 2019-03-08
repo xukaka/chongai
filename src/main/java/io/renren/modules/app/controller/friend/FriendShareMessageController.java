@@ -2,20 +2,21 @@ package io.renren.modules.app.controller.friend;
 
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
+import io.renren.modules.app.dto.WXSession;
 import io.renren.modules.app.entity.friend.FriendShareMessageEntity;
-import io.renren.modules.app.entity.friend.FriendShareTimelineEntity;
+import io.renren.modules.app.form.FriendShareMessageForm;
 import io.renren.modules.app.service.FriendShareMessageService;
-import io.renren.modules.app.service.FriendShareTimelineService;
+import io.renren.modules.app.service.impl.WXRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Map;
 
 
@@ -40,9 +41,7 @@ public class FriendShareMessageController {
      */
     @PostMapping("/owner/list")
     @ApiOperation("获取发布内容列表")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="params",value = "当前页")
-    })
+    @ApiImplicitParam(name="params",value = "分页page从1开始，sidx和order为排序字段非必填",example = "{\"page\":1,\"limit\":10,\"sidx\":\"id\",\"order\":\"asc\"}")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = friendShareMessageService.queryPage(params);
         return R.ok().put("page", page);
@@ -64,8 +63,11 @@ public class FriendShareMessageController {
      */
     @PostMapping("/save")
     @ApiOperation("保存发布内容")
-    public R save(@RequestBody FriendShareMessageEntity friendShareMessage){
-		friendShareMessageService.insertMsgAndTimeline(friendShareMessage);
+    public R save(@RequestBody FriendShareMessageForm friendShareMessage){
+        FriendShareMessageEntity friendShareMessageEntity = new FriendShareMessageEntity();
+        BeanUtils.copyProperties(friendShareMessage,friendShareMessageEntity);
+        friendShareMessageEntity.setCreateTime(System.currentTimeMillis());
+        friendShareMessageService.insertMsgAndTimeline(friendShareMessageEntity);
         return R.ok();
     }
 

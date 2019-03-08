@@ -25,7 +25,7 @@ import io.renren.common.utils.R;
  * @date 2019-03-02 09:38:43
  */
 @RestController
-@RequestMapping("app/friendsharecomment")
+@RequestMapping("app/comment")
 public class FriendShareCommentController {
     @Autowired
     private FriendShareCommentService friendShareCommentService;
@@ -34,7 +34,6 @@ public class FriendShareCommentController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("app:friendsharecomment:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = friendShareCommentService.queryPage(params);
 

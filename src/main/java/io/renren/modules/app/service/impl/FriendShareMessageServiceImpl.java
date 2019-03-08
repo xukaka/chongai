@@ -1,11 +1,10 @@
 package io.renren.modules.app.service.impl;
 
+import io.renren.modules.app.entity.friend.FriendShareCommentEntity;
 import io.renren.modules.app.entity.friend.FriendShareTimelineEntity;
 import io.renren.modules.app.entity.friend.SubscribeEntity;
 import io.renren.modules.app.entity.setting.MemberFriend;
-import io.renren.modules.app.service.FriendShareTimelineService;
-import io.renren.modules.app.service.MemberFriendService;
-import io.renren.modules.app.service.SubscribeService;
+import io.renren.modules.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,6 @@ import io.renren.common.utils.Query;
 
 import io.renren.modules.app.dao.friend.FriendShareMessageDao;
 import io.renren.modules.app.entity.friend.FriendShareMessageEntity;
-import io.renren.modules.app.service.FriendShareMessageService;
 
 
 @Service("friendShareMessageService")
@@ -29,7 +27,7 @@ public class FriendShareMessageServiceImpl extends ServiceImpl<FriendShareMessag
     private FriendShareTimelineService friendShareTimelineService;
 
     @Autowired
-    private MemberFriendService memberFriendService;
+    private FriendShareCommentService friendShareCommentService;
 
     @Autowired
     private SubscribeService subscribeService;
@@ -70,7 +68,10 @@ public class FriendShareMessageServiceImpl extends ServiceImpl<FriendShareMessag
     @Override
     public void deleteMsgAndTimeline(Long id) {
         deleteById(id);
+        //从时间轴上删除动态
         friendShareTimelineService.delete(new EntityWrapper<FriendShareTimelineEntity>().eq("fsm_id",id));
+        //删除动态的评论
+        friendShareCommentService.delete(new EntityWrapper<FriendShareCommentEntity>().eq("fsm_id",id));
     }
 
 }

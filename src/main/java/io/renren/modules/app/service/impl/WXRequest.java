@@ -23,15 +23,15 @@ public class WXRequest {
     private final static Logger logger = LoggerFactory.getLogger(WXRequest.class);
 
     @Value("${wx.app_secret}")
-    private static final String appSecret="";
+    public String appSecret="";
 
     @Value("${wx.app_id}")
-    private static final String appId="";
+    public String appId="";
 
     @Value("${wx.code_session_url}")
-    private static final String wxLoginUrl = "";
+    public String wxLoginUrl = "";
 
-    public static WXSession loginWXWithCode(String code){
+    public WXSession loginWXWithCode(String code){
         //创建httpclient
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;

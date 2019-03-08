@@ -1,23 +1,20 @@
-package io.renren.modules.app.entity.friend;
+package io.renren.modules.app.form;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * 朋友圈分享内容实体表
+ * 朋友圈分享内容实体
  * @author xukaijun
- * @email 383635738@qq.com
- * @date 2019-03-02 09:38:43
  */
-@TableName("p_friend_share_message")
-public class FriendShareMessageEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+@ApiModel("发布的内容实体")
+public class FriendShareMessageForm implements Serializable {
 
-	@TableId
 	private Long id;
 	/**
 	 * 关联member表
@@ -29,29 +26,23 @@ public class FriendShareMessageEntity implements Serializable {
 	 */
 	private String content;
 	/**
-	 * 图片
+	 * 图片列表
 	 */
 	private String images;
 	/**
+	 * 地址
+	 */
+	private String location;
+	/**
 	 * 经度
 	 */
+	@ApiModelProperty("经度")
 	private String lnt;
 	/**
 	 * 纬度
 	 */
+	@ApiModelProperty("纬度")
 	private String lat;
-	/**
-	 * 地址定位
-	 */
-	private String location;
-	/**
-	 * 内容是分享过来的话，关联分享表
-	 */
-	private Long shareId;
-	/**
-	 * 
-	 */
-	private Long createTime;
 
 	/**
 	 * 设置：
@@ -89,18 +80,7 @@ public class FriendShareMessageEntity implements Serializable {
 	public String getContent() {
 		return content;
 	}
-	/**
-	 * 设置：图片
-	 */
-	public void setImages(String images) {
-		this.images = images;
-	}
-	/**
-	 * 获取：图片
-	 */
-	public String getImages() {
-		return images;
-	}
+
 	/**
 	 * 设置：地址定位
 	 */
@@ -112,30 +92,6 @@ public class FriendShareMessageEntity implements Serializable {
 	 */
 	public String getLocation() {
 		return location;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setShareId(Long shareId) {
-		this.shareId = shareId;
-	}
-	/**
-	 * 获取：
-	 */
-	public Long getShareId() {
-		return shareId;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setCreateTime(Long createTime) {
-		this.createTime = createTime;
-	}
-	/**
-	 * 获取：
-	 */
-	public Long getCreateTime() {
-		return createTime;
 	}
 
 	public String getLnt() {
@@ -152,5 +108,13 @@ public class FriendShareMessageEntity implements Serializable {
 
 	public void setLat(String lat) {
 		this.lat = lat;
+	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
 	}
 }

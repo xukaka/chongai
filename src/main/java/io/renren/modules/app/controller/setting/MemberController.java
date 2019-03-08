@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/app/member")
-@Api("用户信息接口")
+@Api(tags = "用户信息接口")
 public class MemberController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class MemberController {
     }
 
     @Login
-    @GetMapping("userId")
+    @GetMapping("/userId")
     @ApiOperation("获取用户ID")
     public R userInfo(@RequestAttribute("userId") Integer userId){
         return R.ok().put("userId", userId);

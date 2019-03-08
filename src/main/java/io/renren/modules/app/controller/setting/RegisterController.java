@@ -16,6 +16,7 @@ import io.renren.modules.app.service.MemberService;
 import io.renren.modules.app.utils.JwtUtils;
 import io.renren.modules.app.service.impl.WXRequest;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpStatus;
@@ -41,7 +42,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app")
-@Api(tags = "APP用户注册接口")
+@Api(tags = "微信登录接口")
 public class RegisterController {
     private final static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
@@ -83,6 +84,7 @@ public class RegisterController {
      */
     @PostMapping("wxLogin")
     @ApiOperation("登录")
+    @ApiImplicitParam(name = "code",value = "微信login方法返回的code")
     public R wxLogin(String code){
         //表单校验
         if(StringUtils.isEmpty(code)){
@@ -105,9 +107,9 @@ public class RegisterController {
                 memberService.registerMemberWithAuth(member,auths);
             }
 
-            // String token = jwtUtils.generateToken(auths.getMemberId());
+            String token = jwtUtils.generateToken(auths.getMemberId());
             Map<String, Object> map = new HashMap<>();
-            map.put("sessionKey", wxSession.getSessionKey());
+            map.put("token", token);
             map.put("memberId", auths.getMemberId());
             return R.ok(map);
 
