@@ -3,5 +3,7 @@
 
 <mapper namespace="io.renren.modules.app.dao.setting.MemberDao">
 
-
+ <update id="updateLocationNumber">
+     update member set lat = #{location.lat},lnt=#{location.lnt} where id=#{location.id}
+ </update>
 </mapper>
