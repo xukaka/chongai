@@ -50,6 +50,7 @@ public class WXRequest {
 
             if (response.getStatusLine().getStatusCode() == 200) {
                 String resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
+                logger.info("微信登录请求url的结果为："+resultString);
                 if(!StringUtils.isEmpty(resultString)){
                     JSONObject wxobject = JSONObject.parseObject(resultString);
                     if(0==wxobject.getInteger("errcode")){  //请求成功

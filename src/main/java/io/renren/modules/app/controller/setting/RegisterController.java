@@ -84,9 +84,10 @@ public class RegisterController {
      */
     @PostMapping("wxLogin")
     @ApiOperation("登录")
-    @ApiImplicitParam(name = "code",value = "微信login方法返回的code")
+    @ApiImplicitParam(name = "code",value = "微信login方法返回的code",paramType = "query")
     public R wxLogin(String code){
         //表单校验
+        logger.info("RegisterController.wxLogin 参数code："+code);
         if(StringUtils.isEmpty(code)){
             throw new RRException("code is null");
         }
