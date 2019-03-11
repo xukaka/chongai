@@ -7,10 +7,7 @@ import io.renren.modules.app.entity.friend.FriendShareMessageEntity;
 import io.renren.modules.app.form.FriendShareMessageForm;
 import io.renren.modules.app.service.FriendShareMessageService;
 import io.renren.modules.app.service.impl.WXRequest;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -41,7 +38,7 @@ public class FriendShareMessageController {
      */
     @PostMapping("/owner/list")
     @ApiOperation("获取发布内容列表")
-    @ApiImplicitParam(name="params",value = "分页page从1开始，sidx和order为排序字段非必填",example = "{\"page\":1,\"limit\":10,\"sidx\":\"id\",\"order\":\"asc\"}")
+    @ApiImplicitParam(name="params",value = "分页page从1开始，sidx和order为排序字段非必填,示例：{\"page\":1,\"limit\":10,\"sidx\":\"id\",\"order\":\"asc\"}")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = friendShareMessageService.queryPage(params);
         return R.ok().put("page", page);

@@ -95,7 +95,7 @@ public class RegisterController {
 
         if(!ObjectUtils.isEmpty(wxSession)){
             MemberAuths auths = memberAuthsService.queryByTypeAndCredential(Constant.WX_TYPE,DigestUtils.sha256Hex(wxSession.getOpenid()));
-            //注册新用户
+            //通过openid查询不到则注册新用户
             if(ObjectUtils.isEmpty(auths)){
                 Member member = new Member();
                 member.setCreateTime(System.currentTimeMillis());
