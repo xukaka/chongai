@@ -58,7 +58,7 @@ spring:
                 #login-password: admin
 server:
     ssl:
-        key-store: classpath:www.hotnews.net.cn.jks
+        key-store: classpath:pet.fangzheng.fun.jks
         key-store-password: xukaka
         key-store-type: JKS
     port: 443

@@ -1,12 +1,15 @@
 package io.renren.modules.app.controller.setting;
 
 
+import com.mchange.v2.beans.BeansUtils;
 import io.renren.common.utils.R;
 import io.renren.modules.app.annotation.Login;
 import io.renren.modules.app.entity.setting.Member;
+import io.renren.modules.app.form.MemberForm;
 import io.renren.modules.app.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +37,20 @@ public class MemberController {
     }
 
     @Login
+    @GetMapping("/update")
+    @ApiOperation("获取用户信息")
+    public R update(MemberForm memberForm){
+        Member member = new Member();
+        BeanUtils.copyProperties(memberForm,member);
+        member.setCreateTime(System.currentTimeMillis());
+        member.setStatus(1);
+        memberService.insertOrUpdate(member);
+        return R.ok();
+    }
+
+    @Login
     @GetMapping("/userId")
-    @ApiOperation("获取用户ID")
+    @ApiOperation("获取用户memberID")
     public R userInfo(@RequestAttribute("userId") Integer userId){
         return R.ok().put("userId", userId);
     }
