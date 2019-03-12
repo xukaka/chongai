@@ -5,6 +5,7 @@ import com.mchange.v2.beans.BeansUtils;
 import io.renren.common.utils.R;
 import io.renren.modules.app.annotation.Login;
 import io.renren.modules.app.entity.setting.Member;
+import io.renren.modules.app.form.LocationForm;
 import io.renren.modules.app.form.MemberForm;
 import io.renren.modules.app.service.MemberService;
 import io.swagger.annotations.Api;
@@ -37,7 +38,7 @@ public class MemberController {
     }
 
     @Login
-    @GetMapping("/update")
+    @PostMapping("/update")
     @ApiOperation("获取用户信息")
     public R update(MemberForm memberForm){
         Member member = new Member();
@@ -45,6 +46,14 @@ public class MemberController {
         member.setCreateTime(System.currentTimeMillis());
         member.setStatus(1);
         memberService.insertOrUpdate(member);
+        return R.ok();
+    }
+
+    //@Login
+    @PostMapping("/location")
+    @ApiOperation("更新用户位置")
+    public R location(LocationForm locationForm){
+        memberService.updateLocationNumber(locationForm);
         return R.ok();
     }
 

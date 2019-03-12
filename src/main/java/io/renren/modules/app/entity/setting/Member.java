@@ -23,6 +23,10 @@ public class Member implements Serializable {
     private String avatar;
     //个性说明
     private String selfIntro;
+    //维度
+    private String lat;
+    //经度
+    private String lnt;
     //地址
     private String address;
     //性别0男，1女
@@ -122,5 +126,21 @@ public class Member implements Serializable {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLnt() {
+        return lnt;
+    }
+
+    public void setLnt(String lnt) {
+        this.lnt = lnt;
     }
 }
