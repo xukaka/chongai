@@ -1,6 +1,10 @@
 package io.renren.modules.app.service.impl;
 
+import io.renren.modules.app.dto.CommentDto;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -24,6 +28,16 @@ public class FriendShareCommentServiceImpl extends ServiceImpl<FriendShareCommen
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<CommentDto> getPage(HashMap params) {
+        return this.baseMapper.getPage(params);
+    }
+
+    @Override
+    public List<CommentDto> querySubThroughParentId(Long fsmId, Long parentId) {
+        return this.baseMapper.querySubThroughParentId(fsmId,parentId);
     }
 
 }

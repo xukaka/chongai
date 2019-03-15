@@ -24,6 +24,8 @@ public class FriendShareMessageEntity implements Serializable {
 	 */
 	@NotBlank(message = "memberId不能为空")
 	private Long memberId;
+
+	private String title;
 	/**
 	 * 内容
 	 */
@@ -152,5 +154,13 @@ public class FriendShareMessageEntity implements Serializable {
 
 	public void setLat(String lat) {
 		this.lat = lat;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

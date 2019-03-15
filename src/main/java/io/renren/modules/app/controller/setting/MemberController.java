@@ -49,7 +49,7 @@ public class MemberController {
         return R.ok();
     }
 
-    //@Login
+    @Login
     @PostMapping("/location")
     @ApiOperation("更新用户位置")
     public R location(LocationForm locationForm){

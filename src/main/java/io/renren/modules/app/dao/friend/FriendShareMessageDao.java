@@ -4,6 +4,9 @@ import io.renren.modules.app.entity.friend.FriendShareMessageEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @author xukaijun
  * @email 383635738@qq.com
@@ -11,5 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface FriendShareMessageDao extends BaseMapper<FriendShareMessageEntity> {
-	
+	List<FriendShareMessageEntity> getPage(HashMap<String,Object> param);
+
+	FriendShareMessageEntity getById(Long id);
 }

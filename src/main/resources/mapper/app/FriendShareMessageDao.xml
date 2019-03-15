@@ -14,5 +14,29 @@
         <result property="createTime" column="create_time"/>
     </resultMap>
 
+    <select id="getPage" resultMap="friendShareMessageMap">
+        select msg.* from p_friend_share_message msg left join p_friend_share_timeline ftime
+          on msg.id=ftime.fsm_id where 1=1
+          <if test="title!=null and '' != title">
+             and msg.title like concat('%', #{title} ,'%')
+          </if>
+          <if test="memberId!=null and '' != memberId">
+             and ftime.member_id = #{memberId}
+          </if>
+           order by ftime.create_time desc
+           limit ${offset},${limit}
+    </select>
+
+    <select id="getTotalCount" resultType="integer">
+        select count(*) from p_friend_share_message msg left join p_friend_share_timeline ftime
+        on msg.id=ftime.fsm_id where 1=1
+        <if test="title!=null and '' != title">
+            msg.title like concat('%', #{title} ,'%')
+        </if>
+    </select>
+
+    <select id="getById" resultMap="friendShareMessageMap">
+        select * from p_friend_share_message where id=#{id}
+    </select>
 
 </mapper>

@@ -3,11 +3,11 @@ package io.renren.modules.app.service.impl;
 import io.renren.modules.app.entity.friend.FriendShareCommentEntity;
 import io.renren.modules.app.entity.friend.FriendShareTimelineEntity;
 import io.renren.modules.app.entity.friend.SubscribeEntity;
-import io.renren.modules.app.entity.setting.MemberFriend;
 import io.renren.modules.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -72,6 +72,16 @@ public class FriendShareMessageServiceImpl extends ServiceImpl<FriendShareMessag
         friendShareTimelineService.delete(new EntityWrapper<FriendShareTimelineEntity>().eq("fsm_id",id));
         //É¾³ý¶¯Ì¬µÄÆÀÂÛ
         friendShareCommentService.delete(new EntityWrapper<FriendShareCommentEntity>().eq("fsm_id",id));
+    }
+
+    @Override
+    public List<FriendShareMessageEntity> getPage(HashMap<String, Object> param) {
+        return this.baseMapper.getPage(param);
+    }
+
+    @Override
+    public FriendShareMessageEntity getById(Long id) {
+        return this.baseMapper.getById(id);
     }
 
 }

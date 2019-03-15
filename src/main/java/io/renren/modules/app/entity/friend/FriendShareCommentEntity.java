@@ -38,6 +38,8 @@ public class FriendShareCommentEntity implements Serializable {
 	 * 被评论的用户
 	 */
 	private Long toMember;
+
+	private Long parentId;
 	/**
 	 * 点赞数
 	 */
@@ -142,5 +144,13 @@ public class FriendShareCommentEntity implements Serializable {
 	 */
 	public Integer getReadCount() {
 		return readCount;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 评论返回实例
@@ -14,6 +15,8 @@ import java.io.Serializable;
 public class CommentDto implements Serializable {
 
 	private Long id;
+
+	private Long fsmId;
 	/**
 	 * 关联member表
 	 */
@@ -26,6 +29,8 @@ public class CommentDto implements Serializable {
 	 * 内容实体 utf8mb4格式能存储emjoy表情
 	 */
 	private String content;
+
+	private Long parentId;
 	/**
 	 * 
 	 */
@@ -38,6 +43,8 @@ public class CommentDto implements Serializable {
 	 * 阅读量
 	 */
 	private Integer readCount;
+
+	private List<CommentDto> subComment;
 
 	/**
 	 * 设置：
@@ -126,5 +133,29 @@ public class CommentDto implements Serializable {
 
 	public void setMemberAvatar(String memberAvatar) {
 		this.memberAvatar = memberAvatar;
+	}
+
+	public List<CommentDto> getSubComment() {
+		return subComment;
+	}
+
+	public void setSubComment(List<CommentDto> subComment) {
+		this.subComment = subComment;
+	}
+
+	public Long getFsmId() {
+		return fsmId;
+	}
+
+	public void setFsmId(Long fsmId) {
+		this.fsmId = fsmId;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 }

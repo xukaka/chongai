@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.app.entity.friend.FriendShareMessageEntity;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,5 +22,9 @@ public interface FriendShareMessageService extends IService<FriendShareMessageEn
     void insertMsgAndTimeline(FriendShareMessageEntity friendShareMessageEntity);
 
     void deleteMsgAndTimeline(Long id);
+
+    List<FriendShareMessageEntity> getPage(HashMap<String,Object> param);
+
+    FriendShareMessageEntity getById(Long id);
 }
 

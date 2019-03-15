@@ -21,6 +21,8 @@ public class FriendShareMessageForm implements Serializable {
 	 */
 	@NotBlank(message = "memberId不能为空")
 	private Long memberId;
+
+	private String title;
 	/**
 	 * 内容
 	 */
@@ -116,5 +118,13 @@ public class FriendShareMessageForm implements Serializable {
 
 	public void setImages(String images) {
 		this.images = images;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }
